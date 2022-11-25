@@ -8,7 +8,7 @@ exports.bicicleta_list = function(req, res){
 
 exports.bicicleta_create = function(req, res){
   
-    const bici = new Bicicleta();
+    var bici = new Bicicleta();
     bici.id = req.body.id;
     bici.color = req.body.color;
     bici.modelo = req.body.modelo;
@@ -38,3 +38,38 @@ exports.bicicleta_delete = function(req, res){
 
 
 
+ 
+ exports.bicicleta_update = function(req, res){
+    var bici = Bicicleta.findById(req.body.id);
+    bici.id= req.body.id;
+    if (req.body.color == null){
+        req.body.color = bici.color
+    }
+    else{
+        bici.color = req.body.color;
+    }
+    if (req.body.modelo == null){
+        req.body.modelo = bici.modelo
+    }
+    else{
+        bici.modelo = req.body.modelo;
+    }
+    if (req.body.lat == null){
+        req.body.lat = bici.ubicacion[0];
+    }
+    else{
+        bici.ubicacion[0] = req.body.lat;
+    }
+    if (req.body.lng == null){
+        req.body.lng = bici.ubicacion[0];
+    }
+    else{
+        bici.ubicacion[1] = req.body.lng;
+    }
+ 
+
+    res.status(200).json({bicicleta_editada: bici});
+ }
+
+
+ 

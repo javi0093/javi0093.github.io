@@ -42,6 +42,13 @@ exports.bicicleta_delete = function(req, res){
  exports.bicicleta_update = function(req, res){
     var bici = Bicicleta.findById(req.body.id);
     bici.id= req.body.id;
+    var bici2 = req.body.newid;
+    if(bici2 == null){
+        bici.id= req.body.id;
+    }
+    else{
+        bici.id= req.body.newid;
+    } 
     if (req.body.color == null){
         req.body.color = bici.color
     }

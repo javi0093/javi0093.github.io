@@ -8,12 +8,16 @@
     "test": "jasmine"
   },
   "dependencies": {
+    "@types/parse": "^3.0.1",
     "axios": "^1.2.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
+    "moment": "^2.29.4",
+    "mongoose": "^6.7.3",
     "morgan": "~1.9.1",
+    "parse": "^3.5.1",
     "pug": "^3.0.2",
     "request": "^2.88.2"
   },

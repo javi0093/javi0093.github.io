@@ -14,12 +14,11 @@ var app = express();
 
 var mongoose = require('mongoose')
 
-var mongoDB = 'mongodb://127.0.0.1/red_bicicletas';
-mongoose.connect(mongoDB,{ useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.promise = global.promise;
+var mongoDB = 'mongodb://127.0.0.1/red_bicicletas';;
+mongoose.connect(mongoDB, {useNewUrlParser: true});
+mongoose.Promise = global.Promise;
 var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'mongoDB connection error:'));
-
+db.on('error', console.error.bind(console, 'MongoDB connection error: '));
 
 
 // view engine setup

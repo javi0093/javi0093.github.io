@@ -3,7 +3,7 @@ var Bicicleta = require('../../models/bicicleta');
 var server = require('../../bin/www');
 var request = require('request');
 
-var base_url = "http://127.0.0.1/3000/api/bicicletas";
+var base_url = "http://127.0.0.1:3000/api/bicicletas";
 
 beforeAll(async ()=>{
     await mongoose.disconnect();
@@ -32,15 +32,15 @@ describe('BICICLETAS API', () => {
     
     describe("GET BICICLETAS /", () => {
         it("Status 200", (done) => {
-            request.get(base_url, function(error, response, body){
-                var result = JSON.parse(body);
+            request.get(base_url + "/", function(error, response, body){
                 expect(response.statusCode).toBe(200);
+                var result = JSON.parse(body);
+                console.log(result);
                 expect(result.bicicletas.length).toBe(0);
                 done();
             });
         });
     });
-
     describe("POST BICICLETAS /create", () => {
         it("Status 200", (done)=>{
             var headers = {'content-type' : 'application/json'};
@@ -53,6 +53,7 @@ describe('BICICLETAS API', () => {
                 expect(response.statusCode).toBe(200);
                 var bici = JSON.parse(body).bicicleta;
                 console.log(bici);
+
                 expect(bici.color).toBe("rojo");
                 expect(bici.ubicacion[0]).toBe(-34);
                 expect(bici.ubicacion[1]).toBe(-54);

@@ -50,6 +50,8 @@ bicicletaSchema.statics.removeByCode = function(aCode, cb){
 };
 
 module.exports = mongoose.model('Bicicleta', bicicletaSchema);
+
+
 /*Bicicleta.prototype.toString = function(){
     return 'id: ' + this.id + " | color: " + this.color;
 }

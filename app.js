@@ -29,6 +29,7 @@ var mongoose = require('mongoose');
 const Token = require('./models/token');
 const Usuario = require('./models/usuario');
 const { token } = require('morgan');
+const { log } = require('console');
 
 var mongoDB = 'mongodb://127.0.0.1/red_bicicletas';;
 mongoose.connect(mongoDB, {useNewUrlParser: true});
@@ -64,9 +65,9 @@ app.post('/login', function(req, res, next){
   })(req, res, next);
 });
 
-app.get('/logout', function(req, res){
-  req.logOut();
-  res.redirect('/');
+app.get('/logout', function(req, res, cb){
+  req.logOut(cb)
+  res.redirect('/')
 });
 
 app.get('/forgotpassword', function(req, res){
@@ -113,11 +114,21 @@ app.post('/resetPassword', function(req, res){
   });
 });
 
+function loggedIn(req, res, next){
+  if (req.user) {
+    next();
+  }else{
+    console.log('usuario sin loguear');
+    res.redirect('/login');
+  }
+};
+
+
 app.use('/', indexRouter);
 app.use('/usuarios', usuariosRouter);
 app.use('/token',tokenRouter);
 
-app.use('/bicicletas', bicicletasRouter);
+app.use('/bicicletas', loggedIn, bicicletasRouter);
 app.use('/api/bicicletas', bicicletasAPIRouter);
 app.use('/api/usuarios', usuariosAPIRouter);
 

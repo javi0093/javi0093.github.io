@@ -4,7 +4,7 @@ var Usuario = require('../../models/usuario');
 var Reserva = require('../../models/reserva');
 
 
-describe('Testing Usuarios', function(){
+/* describe('Testing Usuarios', function(){
     beforeEach(function(done){
         var mongoDB = 'mongodb://127.0.0.1/testdb';
         mongoose.connect(mongoDB, { useNewUrlParser: true});
@@ -56,4 +56,4 @@ describe('Testing Usuarios', function(){
 
         });
     });
-});
+}); */

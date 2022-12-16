@@ -2,13 +2,10 @@
   "name": "red-bicicletas",
   "version": "0.0.0",
   "private": true,
-  "homepage":"https://javi0093.github.io/",
   "scripts": {
     "start": "node ./bin/www",
     "devstart": "nodemon ./bin/www",
-    "test": "jasmine",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "test": "jasmine"
   },
   "dependencies": {
     "@types/parse": "^3.0.1",

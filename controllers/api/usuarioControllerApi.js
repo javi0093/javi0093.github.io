@@ -25,5 +25,3 @@ exports.usuario_reservar = function(req, res) {
         });
     });
 };
-
-//

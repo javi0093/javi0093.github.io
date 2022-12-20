@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const passport = require('./config/passport');
 const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
 const jwt = require('jsonwebtoken');
 
 
@@ -17,12 +18,22 @@ var bicicletasAPIRouter = require('./routes/api/bicicletas');
 var usuariosAPIRouter = require('./routes/api/usuarios');
 var authAPIRouter = require('./routes/api/auth');
 
-const store = new session.MemoryStore;
+let store;
+if (process.env.NODE_ENV === 'development'){
+  store = new session.MemoryStore;
+}else{
+  store = new MongoDBStore({
+    url: process.eventNames.MONGO_URI,
+    collection: 'sessions'
+  });
+  store.on('error', function(error){
+    assert.ifError(error);
+    assert.ok(false);
+  });
+}
 
 var app = express();
-
 app.set('secretKey', 'jwt_pwd_!!223344');
-
 app.use(session({
   cookie: { maxAge: 240*60*60*1000},
   store: store,
@@ -35,7 +46,7 @@ var mongoose = require('mongoose');
 const Token = require('./models/token');
 const Usuario = require('./models/usuario');
 const { token } = require('morgan');
-const { log } = require('console');
+const { log, assert } = require('console');
 
 //var mongoDB = 'mongodb://127.0.0.1/red_bicicletas';
 //mongodb+srv://admin:SHOLL6QYZkflEBHs@red-bicicletas.kj2dacv.mongodb.net/?retryWrites=true&w=majority
@@ -148,6 +159,24 @@ app.use('/privacy_policy', function(req, res){
 app.use('/term_y_cond', function(req, res){
   res.sendFile('/public/term_y_cond.html');
 });
+
+app.get('/auth/google',
+  passport.authenticate('google', 
+  { scope: [ 'https://www.googleapis.com/auth/plus.login',
+
+              'https://www.googleapis.com/auth/userinfo.email',
+
+              'https://www.googleapis.com/auth/userinfo.profile',
+            ],
+  }));
+
+app.get('/auth/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/error' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

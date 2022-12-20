@@ -8,7 +8,7 @@ const passport = require('./config/passport');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const jwt = require('jsonwebtoken');
-const assert2 = require('assert').strict;
+const assert = require('assert');
 
 
 var indexRouter = require('./routes/index');
@@ -26,12 +26,12 @@ if (process.env.NODE_ENV === 'development'){
   store = new session.MemoryStore;
 }else{
   store = new MongoDBStore({
-    url: process.eventNames.MONGO_URI,
+    url: process.env.MONGO_URI,
     collection: 'sessions'
   });
   store.on('error', function(error){
-    assert2.ifError(error);
-    assert2.ok(false);
+    assert.ifError(error);
+    assert.ok(false);
   });
 }
 

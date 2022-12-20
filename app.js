@@ -8,7 +8,7 @@ const passport = require('./config/passport');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const jwt = require('jsonwebtoken');
-const assert = require('assert');
+//const assert = require('assert');
 
 
 var indexRouter = require('./routes/index');

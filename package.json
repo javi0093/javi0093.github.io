@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@types/parse": "^3.0.1",
+    "assert": "^2.0.0",
     "axios": "^1.2.0",
     "bcrypt": "^5.1.0",
     "connect-mongodb-session": "^3.1.1",

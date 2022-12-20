@@ -17,6 +17,8 @@ var bicicletasRouter = require('./routes/bicicletas');
 var bicicletasAPIRouter = require('./routes/api/bicicletas');
 var usuariosAPIRouter = require('./routes/api/usuarios');
 var authAPIRouter = require('./routes/api/auth');
+const Token = require('./models/token');
+const Usuario = require('./models/usuario');
 
 let store;
 if (process.env.NODE_ENV === 'development'){
@@ -27,7 +29,7 @@ if (process.env.NODE_ENV === 'development'){
     collection: 'sessions'
   });
   store.on('error', function(error){
-    assert.Error(error);
+    assert.ifError(error);
     assert.ok(false);
   });
 }
@@ -43,8 +45,6 @@ app.use(session({
 }));
 
 var mongoose = require('mongoose');
-const Token = require('./models/token');
-const Usuario = require('./models/usuario');
 const { token } = require('morgan');
 const { log, assert } = require('console');
 

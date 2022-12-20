@@ -27,7 +27,7 @@ if (process.env.NODE_ENV === 'development'){
     collection: 'sessions'
   });
   store.on('error', function(error){
-    assert.ifError(error);
+    assert.Error(error);
     assert.ok(false);
   });
 }

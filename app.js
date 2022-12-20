@@ -8,7 +8,7 @@ const passport = require('./config/passport');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const jwt = require('jsonwebtoken');
-const assert = require('assert').strict;
+const assert2 = require('assert').strict;
 
 
 var indexRouter = require('./routes/index');
@@ -30,8 +30,8 @@ if (process.env.NODE_ENV === 'development'){
     collection: 'sessions'
   });
   store.on('error', function(error){
-    assert.ifError(error);
-    assert.ok(false);
+    assert2.ifError(error);
+    assert2.ok(false);
   });
 }
 

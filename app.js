@@ -8,7 +8,7 @@ const passport = require('./config/passport');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const jwt = require('jsonwebtoken');
-//const assert = require('assert');
+const assert = require('assert');
 
 
 var indexRouter = require('./routes/index');
@@ -47,7 +47,7 @@ app.use(session({
 
 var mongoose = require('mongoose');
 const { token } = require('morgan');
-const { log, assert } = require('console');
+//const { log, assert } = require('console');
 
 //var mongoDB = 'mongodb://127.0.0.1/red_bicicletas';
 //mongodb+srv://admin:SHOLL6QYZkflEBHs@red-bicicletas.kj2dacv.mongodb.net/?retryWrites=true&w=majority

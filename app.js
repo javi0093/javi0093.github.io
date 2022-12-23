@@ -21,7 +21,7 @@ const bicicletasRouter = require('./routes/bicicletas');
 const bicicletasAPIRouter = require('./routes/api/bicicletas');
 const usuariosAPIRouter = require('./routes/api/usuarios');
 const tokenRouter = require('./routes/token');
-const authFacebook = require('./routes/facebook');
+
 
 
 
@@ -109,7 +109,6 @@ app.use('/api/bicicletas',validarUsuario, bicicletasAPIRouter);
 app.use('/api/usuarios', usuariosAPIRouter);
 app.use('/usuarios', usuariosRouter);
 app.use('/token', tokenRouter);
-app.use('/auth/facebook', authFacebook);
 
 app.use('/privacy_policy', function(req, res){
  res.sendFile('public/policy_privacy.html');
